@@ -1,10 +1,10 @@
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 
-const Button = ({onPress,navigation,text,style}) => {
+const Button = ({onPress,navigation,text,style,certificate}) => {
   return (
     <TouchableOpacity style={[styles.button,style]} onPress={onPress} navigation={navigation}>
-      <Text style={{color:'white',justifyContent:'center',alignItems:'center',alignSelf:'center',top:12,fontWeight:400,fontSize:16}}>{text}</Text>
+      <Text style={{color:'white',justifyContent:'center',alignItems:'center',alignSelf:'center',top:12,fontWeight:400,fontSize:16,color:certificate?'blue':'white'}}>{text}</Text>
     </TouchableOpacity>
   )
 }
