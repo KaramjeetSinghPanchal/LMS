@@ -10,6 +10,7 @@ import {
   ScrollView,
   useWindowDimensions,
 } from 'react-native';
+import {rS, vR, rMS} from '../Components/Responsive';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import {useState} from 'react';
@@ -17,6 +18,8 @@ import Search from '../Components/Search';
 
 const Courses = ({navigation}) => {
   const {width, height} = useWindowDimensions();
+  console.warn(width, height, 'width, height');
+
   const images = {
     logo: require('../assets/Images/logo.png'),
     frame: require('../assets/Images/Frame.png'),
@@ -50,7 +53,7 @@ const Courses = ({navigation}) => {
   const [select, setselected] = useState();
   const [save, setsave] = useState();
   const handlesave = () => {
-     navigation.navigate('Coursedetails')
+    navigation.navigate('Coursedetails');
   };
 
   const yes = width > height;
@@ -58,7 +61,7 @@ const Courses = ({navigation}) => {
     <SafeAreaView style={{padding: 26}}>
       <ScrollView
         showsVerticalScrollIndicator={false}
-        style={{top: Platform.OS ==='ios'?-80: 0, height: 700}}>
+        style={{top: Platform.OS === 'ios' ? -80 : 0, height: 700}}>
         <View style={styles.header}>
           <View>
             {' '}
@@ -68,7 +71,7 @@ const Courses = ({navigation}) => {
             {' '}
             <Image
               source={images.frame1}
-              style={{width: 17, height: 15, marginTop: 5}}
+              style={{width: vR(17), height: rS(15), marginTop: 5}}
             />
             <Text style={{marginLeft: 10, marginTop: 3}}>4.5</Text>{' '}
           </View>
@@ -90,7 +93,9 @@ const Courses = ({navigation}) => {
         </View>
 
         <View>
-          <Text style={{fontWeight: 400, fontSize: 26, top: 15}}>Courses</Text>
+          <Text style={{fontWeight: 400, fontSize: rMS(26), top: 15}}>
+            Courses
+          </Text>
         </View>
         <View style={{marginTop: 30}}>
           <FlatList
@@ -109,7 +114,7 @@ const Courses = ({navigation}) => {
           <TouchableOpacity
             style={{
               width: '100%',
-              height: width > height ? 170 : 107,
+              height: width > height ? rS(170) : rS(107),
               backgroundColor: 'rgba(245, 249, 252, 1)',
               borderRadius: 20,
               top: 30,
@@ -120,8 +125,8 @@ const Courses = ({navigation}) => {
           >
             <View
               style={{
-                height: yes ? 120 : 92,
-                width: yes ? 120 : 94,
+                height: yes ? rS(120) : rS(92),
+                width: yes ? vR(120) : vR(94),
                 backgroundColor: 'rgba(217, 240, 246, 1)',
                 marginTop: yes ? 25 : 10,
                 marginLeft: yes ? -60 : 10,
@@ -131,43 +136,52 @@ const Courses = ({navigation}) => {
               <Image
                 source={courseImages.user1}
                 style={{
-                  height: yes ? 100 : 70,
-                  width: yes ? 100 : 70,
-                  left: 10,
-                  top: 10,
+                  height: yes ? rS(100) : rS(70),
+                  width: yes ? rS(100) : rS(70),
+                  left: rMS(15),
+                  top: rS(10),
                 }}
               />
 
               <Image
                 source={courseImages.star}
                 style={{
-                  height: 20,
-                  width: 20,
-                  borderRadius: 10,
+                  height: rS(20),
+                  width: rS(20),
+                  borderRadius: rMS(10),
                   position: 'absolute',
-                  left: 80,
-                  top: -5,
+                  left: Platform.OS === 'ios' ? rMS(100) : rMS(80),
+                  top: rMS(-5),
                 }}
               />
 
               <View
                 style={{
-                  height: 32,
-                  width: 32,
+                  height: rS(28),
+                  width: Platform.OS == 'ios' ? vR(27) : vR(28),
                   borderRadius: 100,
                   position: 'absolute',
                   backgroundColor: save ? 'gray' : 'rgba(11, 87, 207, 1)',
-                  marginLeft: yes ? 600 : Platform.OS === 'ios' ? 320 : 250,
+                  marginLeft: yes
+                    ? rMS(600)
+                    : Platform.OS === 'ios'
+                    ? rMS(295)
+                    : rMS(255),
 
-                  top: yes ? 100 : 60,
+                  top: yes ? rMS(100) : rMS(70),
                 }}
                 onPress={handlesave} // Ensure this is set
               >
-                <Icon
-                  name="bookmark"
-                  style={{color: 'white', top: 4, left: 5}}
-                  size={23}
-                />
+                <View style={{justifyContent: 'center', alignSelf: 'center'}}>
+                  <Icon
+                    name="bookmark"
+                    style={{
+                      color: 'white',
+                      top: rMS(4),
+                    }}
+                    size={Platform.OS == 'ios' ? 25 : 20}
+                  />
+                </View>
               </View>
             </View>
 
@@ -199,10 +213,10 @@ const Courses = ({navigation}) => {
           <TouchableOpacity
             style={{
               width: '100%',
-              height: width > height ? 170 : 107,
+              height: width > height ? rS(170) : rS(107),
               backgroundColor: 'rgba(245, 249, 252, 1)',
               borderRadius: 20,
-              top: 30,
+              marginTop: 40,
               flexDirection: 'row',
               justifyContent: 'space-around',
             }}
@@ -210,8 +224,8 @@ const Courses = ({navigation}) => {
           >
             <View
               style={{
-                height: yes ? 120 : 92,
-                width: yes ? 120 : 94,
+                height: yes ? rS(120) : rS(92),
+                width: yes ? vR(120) : vR(94),
                 backgroundColor: 'rgba(217, 240, 246, 1)',
                 marginTop: yes ? 25 : 10,
                 marginLeft: yes ? -60 : 10,
@@ -221,135 +235,52 @@ const Courses = ({navigation}) => {
               <Image
                 source={courseImages.user1}
                 style={{
-                  height: yes ? 100 : 70,
-                  width: yes ? 100 : 70,
-                  left: 10,
-                  top: 10,
+                  height: yes ? rS(100) : rS(70),
+                  width: yes ? rS(100) : rS(70),
+                  left: rMS(15),
+                  top: rS(10),
                 }}
               />
 
               <Image
                 source={courseImages.star}
                 style={{
-                  height: 20,
-                  width: 20,
-                  borderRadius: 10,
+                  height: rS(20),
+                  width: rS(20),
+                  borderRadius: rMS(10),
                   position: 'absolute',
-                  left: 80,
-                  top: -5,
+                  left: Platform.OS === 'ios' ? rMS(100) : rMS(80),
+                  top: rMS(-5),
                 }}
               />
 
               <View
                 style={{
-                  height: 32,
-                  width: 32,
+                  height: rS(28),
+                  width: Platform.OS == 'ios' ? vR(27) : vR(28),
                   borderRadius: 100,
                   position: 'absolute',
                   backgroundColor: save ? 'gray' : 'rgba(11, 87, 207, 1)',
-                  marginLeft: yes ? 600 : Platform.OS === 'ios' ? 320 : 250,
+                  marginLeft: yes
+                    ? rMS(700)
+                    : Platform.OS === 'ios'
+                    ? rMS(295)
+                    : rMS(255),
 
-                  top: yes ? 100 : 60,
+                  top: yes ? rMS(100) : rMS(70),
                 }}
                 onPress={handlesave} // Ensure this is set
               >
-                <Icon
-                  name="bookmark"
-                  style={{color: 'white', top: 4, left: 5}}
-                  size={23}
-                />
-              </View>
-            </View>
-
-            <View>
-              <Text
-                style={{
-                  marginTop: 30,
-                  fontSize: Platform.OS === 'android' ? 15 : 17,
-                  fontSize: yes ? 25 : Platform.OS === 'android' ? 15 : 17,
-                  fontWeight: yes ? '500' : '400',
-                }}>
-                Self Esteem & Confidence
-              </Text>
-              <View style={{flexDirection: 'row'}}>
-                <Text
-                  style={{
-                    color: 'rgba(101, 101, 101, 1)',
-                    fontSize: Platform.OS === 'android' ? 14 : 16,
-                    fontWeight: '300',
-                  }}>
-                  22 Videos
-                </Text>
-                <Text style={styles.smalcolor}>|</Text>
-                <Text style={styles.smalcolor}>20 Points</Text>
-              </View>
-            </View>
-          </TouchableOpacity>
-
-        
-
-          <TouchableOpacity
-            style={{
-              width: '100%',
-              height: width > height ? 170 : 107,
-              backgroundColor: 'rgba(245, 249, 252, 1)',
-              borderRadius: 20,
-              top: 30,
-              flexDirection: 'row',
-              justifyContent: 'space-around',
-            }}
-            onPress={handlesave} // Ensure this is set
-          >
-            <View
-              style={{
-                height: yes ? 120 : 92,
-                width: yes ? 120 : 94,
-                backgroundColor: 'rgba(217, 240, 246, 1)',
-                marginTop: yes ? 25 : 10,
-                marginLeft: yes ? -60 : 10,
-                borderRadius: 12,
-                left: Platform.OS === 'ios' ? -20 : -3,
-              }}>
-              <Image
-                source={courseImages.user1}
-                style={{
-                  height: yes ? 100 : 70,
-                  width: yes ? 100 : 70,
-                  left: 10,
-                  top: 10,
-                }}
-              />
-
-              <Image
-                source={courseImages.star}
-                style={{
-                  height: 20,
-                  width: 20,
-                  borderRadius: 10,
-                  position: 'absolute',
-                  left: 80,
-                  top: -5,
-                }}
-              />
-
-              <View
-                style={{
-                  height: 32,
-                  width: 32,
-                  borderRadius: 100,
-                  position: 'absolute',
-                  backgroundColor: save ? 'gray' : 'rgba(11, 87, 207, 1)',
-                  marginLeft: yes ? 600 : Platform.OS === 'ios' ? 320 : 250,
-
-                  top: yes ? 100 : 60,
-                }}
-                onPress={handlesave} // Ensure this is set
-              >
-                <Icon
-                  name="bookmark"
-                  style={{color: 'white', top: 4, left: 5}}
-                  size={23}
-                />
+                <View style={{justifyContent: 'center', alignSelf: 'center'}}>
+                  <Icon
+                    name="bookmark"
+                    style={{
+                      color: 'white',
+                      top: rMS(4),
+                    }}
+                    size={Platform.OS == 'ios' ? 25 : 20}
+                  />
+                </View>
               </View>
             </View>
 
@@ -381,10 +312,10 @@ const Courses = ({navigation}) => {
           <TouchableOpacity
             style={{
               width: '100%',
-              height: width > height ? 170 : 107,
+              height: width > height ? rS(170) : rS(107),
               backgroundColor: 'rgba(245, 249, 252, 1)',
               borderRadius: 20,
-              top: 30,
+              marginTop: 10,
               flexDirection: 'row',
               justifyContent: 'space-around',
             }}
@@ -392,8 +323,8 @@ const Courses = ({navigation}) => {
           >
             <View
               style={{
-                height: yes ? 120 : 92,
-                width: yes ? 120 : 94,
+                height: yes ? rS(120) : rS(92),
+                width: yes ? vR(120) : vR(94),
                 backgroundColor: 'rgba(217, 240, 246, 1)',
                 marginTop: yes ? 25 : 10,
                 marginLeft: yes ? -60 : 10,
@@ -403,132 +334,52 @@ const Courses = ({navigation}) => {
               <Image
                 source={courseImages.user1}
                 style={{
-                  height: yes ? 100 : 70,
-                  width: yes ? 100 : 70,
-                  left: 10,
-                  top: 10,
+                  height: yes ? rS(100) : rS(70),
+                  width: yes ? rS(100) : rS(70),
+                  left: rMS(15),
+                  top: rS(10),
                 }}
               />
 
               <Image
                 source={courseImages.star}
                 style={{
-                  height: 20,
-                  width: 20,
-                  borderRadius: 10,
+                  height: rS(20),
+                  width: rS(20),
+                  borderRadius: rMS(10),
                   position: 'absolute',
-                  left: 80,
-                  top: -5,
+                  left: Platform.OS === 'ios' ? rMS(100) : rMS(80),
+                  top: rMS(-5),
                 }}
               />
 
               <View
                 style={{
-                  height: 32,
-                  width: 32,
+                  height: rS(28),
+                  width: Platform.OS == 'ios' ? vR(27) : vR(28),
                   borderRadius: 100,
                   position: 'absolute',
                   backgroundColor: save ? 'gray' : 'rgba(11, 87, 207, 1)',
-                  marginLeft: yes ? 600 : Platform.OS === 'ios' ? 320 : 250,
+                  marginLeft: yes
+                    ? rMS(700)
+                    : Platform.OS === 'ios'
+                    ? rMS(295)
+                    : rMS(255),
 
-                  top: yes ? 100 : 60,
+                  top: yes ? rMS(100) : rMS(70),
                 }}
                 onPress={handlesave} // Ensure this is set
               >
-                <Icon
-                  name="bookmark"
-                  style={{color: 'white', top: 4, left: 5}}
-                  size={23}
-                />
-              </View>
-            </View>
-
-            <View>
-              <Text
-                style={{
-                  marginTop: 30,
-                  fontSize: Platform.OS === 'android' ? 15 : 17,
-                  fontSize: yes ? 25 : Platform.OS === 'android' ? 15 : 17,
-                  fontWeight: yes ? '500' : '400',
-                }}>
-                Self Esteem & Confidence
-              </Text>
-              <View style={{flexDirection: 'row'}}>
-                <Text
-                  style={{
-                    color: 'rgba(101, 101, 101, 1)',
-                    fontSize: Platform.OS === 'android' ? 14 : 16,
-                    fontWeight: '300',
-                  }}>
-                  22 Videos
-                </Text>
-                <Text style={styles.smalcolor}>|</Text>
-                <Text style={styles.smalcolor}>20 Points</Text>
-              </View>
-            </View>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={{
-              width: '100%',
-              height: width > height ? 170 : 107,
-              backgroundColor: 'rgba(245, 249, 252, 1)',
-              borderRadius: 20,
-              top: 30,
-              flexDirection: 'row',
-              justifyContent: 'space-around',
-            }}
-            onPress={handlesave} // Ensure this is set
-          >
-            <View
-              style={{
-                height: yes ? 120 : 92,
-                width: yes ? 120 : 94,
-                backgroundColor: 'rgba(217, 240, 246, 1)',
-                marginTop: yes ? 25 : 10,
-                marginLeft: yes ? -60 : 10,
-                borderRadius: 12,
-                left: Platform.OS === 'ios' ? -20 : -3,
-              }}>
-              <Image
-                source={courseImages.user1}
-                style={{
-                  height: yes ? 100 : 70,
-                  width: yes ? 100 : 70,
-                  left: 10,
-                  top: 10,
-                }}
-              />
-
-              <Image
-                source={courseImages.star}
-                style={{
-                  height: 20,
-                  width: 20,
-                  borderRadius: 10,
-                  position: 'absolute',
-                  left: 80,
-                  top: -5,
-                }}
-              />
-
-              <View
-                style={{
-                  height: 32,
-                  width: 32,
-                  borderRadius: 100,
-                  position: 'absolute',
-                  backgroundColor: save ? 'gray' : 'rgba(11, 87, 207, 1)',
-                  marginLeft: yes ? 600 : Platform.OS === 'ios' ? 320 : 250,
-
-                  top: yes ? 100 : 60,
-                }}
-                onPress={handlesave} // Ensure this is set
-              >
-                <Icon
-                  name="bookmark"
-                  style={{color: 'white', top: 4, left: 5}}
-                  size={23}
-                />
+                <View style={{justifyContent: 'center', alignSelf: 'center'}}>
+                  <Icon
+                    name="bookmark"
+                    style={{
+                      color: 'white',
+                      top: rMS(4),
+                    }}
+                    size={Platform.OS == 'ios' ? 25 : 20}
+                  />
+                </View>
               </View>
             </View>
 
@@ -560,10 +411,10 @@ const Courses = ({navigation}) => {
           <TouchableOpacity
             style={{
               width: '100%',
-              height: width > height ? 170 : 107,
+              height: width > height ? rS(170) : rS(107),
               backgroundColor: 'rgba(245, 249, 252, 1)',
               borderRadius: 20,
-              top: 30,
+              marginTop: 10,
               flexDirection: 'row',
               justifyContent: 'space-around',
             }}
@@ -571,8 +422,8 @@ const Courses = ({navigation}) => {
           >
             <View
               style={{
-                height: yes ? 120 : 92,
-                width: yes ? 120 : 94,
+                height: yes ? rS(120) : rS(92),
+                width: yes ? vR(120) : vR(94),
                 backgroundColor: 'rgba(217, 240, 246, 1)',
                 marginTop: yes ? 25 : 10,
                 marginLeft: yes ? -60 : 10,
@@ -582,132 +433,52 @@ const Courses = ({navigation}) => {
               <Image
                 source={courseImages.user1}
                 style={{
-                  height: yes ? 100 : 70,
-                  width: yes ? 100 : 70,
-                  left: 10,
-                  top: 10,
+                  height: yes ? rS(100) : rS(70),
+                  width: yes ? rS(100) : rS(70),
+                  left: rMS(15),
+                  top: rS(10),
                 }}
               />
 
               <Image
                 source={courseImages.star}
                 style={{
-                  height: 20,
-                  width: 20,
-                  borderRadius: 10,
+                  height: rS(20),
+                  width: rS(20),
+                  borderRadius: rMS(10),
                   position: 'absolute',
-                  left: 80,
-                  top: -5,
+                  left: Platform.OS === 'ios' ? rMS(100) : rMS(80),
+                  top: rMS(-5),
                 }}
               />
 
               <View
                 style={{
-                  height: 32,
-                  width: 32,
+                  height: rS(28),
+                  width: Platform.OS == 'ios' ? vR(27) : vR(28),
                   borderRadius: 100,
                   position: 'absolute',
                   backgroundColor: save ? 'gray' : 'rgba(11, 87, 207, 1)',
-                  marginLeft: yes ? 600 : Platform.OS === 'ios' ? 320 : 250,
+                  marginLeft: yes
+                    ? rMS(700)
+                    : Platform.OS === 'ios'
+                    ? rMS(295)
+                    : rMS(255),
 
-                  top: yes ? 100 : 60,
+                  top: yes ? rMS(100) : rMS(70),
                 }}
                 onPress={handlesave} // Ensure this is set
               >
-                <Icon
-                  name="bookmark"
-                  style={{color: 'white', top: 4, left: 5}}
-                  size={23}
-                />
-              </View>
-            </View>
-
-            <View>
-              <Text
-                style={{
-                  marginTop: 30,
-                  fontSize: Platform.OS === 'android' ? 15 : 17,
-                  fontSize: yes ? 25 : Platform.OS === 'android' ? 15 : 17,
-                  fontWeight: yes ? '500' : '400',
-                }}>
-                Self Esteem & Confidence
-              </Text>
-              <View style={{flexDirection: 'row'}}>
-                <Text
-                  style={{
-                    color: 'rgba(101, 101, 101, 1)',
-                    fontSize: Platform.OS === 'android' ? 14 : 16,
-                    fontWeight: '300',
-                  }}>
-                  22 Videos
-                </Text>
-                <Text style={styles.smalcolor}>|</Text>
-                <Text style={styles.smalcolor}>20 Points</Text>
-              </View>
-            </View>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={{
-              width: '100%',
-              height: width > height ? 170 : 107,
-              backgroundColor: 'rgba(245, 249, 252, 1)',
-              borderRadius: 20,
-              top: 30,
-              flexDirection: 'row',
-              justifyContent: 'space-around',
-            }}
-            onPress={handlesave} // Ensure this is set
-          >
-            <View
-              style={{
-                height: yes ? 120 : 92,
-                width: yes ? 120 : 94,
-                backgroundColor: 'rgba(217, 240, 246, 1)',
-                marginTop: yes ? 25 : 10,
-                marginLeft: yes ? -60 : 10,
-                borderRadius: 12,
-                left: Platform.OS === 'ios' ? -20 : -3,
-              }}>
-              <Image
-                source={courseImages.user1}
-                style={{
-                  height: yes ? 100 : 70,
-                  width: yes ? 100 : 70,
-                  left: 10,
-                  top: 10,
-                }}
-              />
-
-              <Image
-                source={courseImages.star}
-                style={{
-                  height: 20,
-                  width: 20,
-                  borderRadius: 10,
-                  position: 'absolute',
-                  left: 80,
-                  top: -5,
-                }}
-              />
-
-              <View
-                style={{
-                  height: 32,
-                  width: 32,
-                  borderRadius: 100,
-                  position: 'absolute',
-                  backgroundColor: save ? 'gray' : 'rgba(11, 87, 207, 1)',
-                  marginLeft: yes ? 600 : Platform.OS === 'ios' ? 320 : 250,
-
-                  top: yes ? 100 : 60,
-                }}
-                onPress={handlesave} // Ensure this is set
-              >
-                <Icon
-                  name="bookmark"
-                  style={{color: 'white', top: 4, left: 5}}
-                  size={23}
-                />
+                <View style={{justifyContent: 'center', alignSelf: 'center'}}>
+                  <Icon
+                    name="bookmark"
+                    style={{
+                      color: 'white',
+                      top: rMS(4),
+                    }}
+                    size={Platform.OS == 'ios' ? 25 : 20}
+                  />
+                </View>
               </View>
             </View>
 
@@ -740,6 +511,7 @@ const Courses = ({navigation}) => {
       <Search
         onPress={() => navigation.navigate('Searchscreen')}
         navigation={navigation}
+        width={width}
       />
     </SafeAreaView>
   );
@@ -747,12 +519,13 @@ const Courses = ({navigation}) => {
 
 const styles = StyleSheet.create({
   image: {
-    width: 25,
-    height: 25,
+    width: rS(25),
+    height: vR(25),
   },
   header: {
     justifyContent: 'space-between',
     flexDirection: 'row',
+    // marginTop:rMS()
   },
   marginperoperty: {},
   smalcolor: {

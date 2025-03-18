@@ -2,6 +2,7 @@ import {
   FlatList,
   Image,
   ImageBase,
+  Platform,
   ScrollView,
   StyleSheet,
   Text,
@@ -13,6 +14,8 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import Header from '../Components/Header';
 import {chaptersData, chapterslisting} from '../Components/Chapters';
 import Button from './Button';
+import { rS,vR,rMS } from '../Components/Responsive';
+
 const Coursedetails = ({navigation}) => {
   const data = chaptersData;
   
@@ -36,7 +39,7 @@ const Coursedetails = ({navigation}) => {
           }}>
           <TouchableOpacity
             style={{flexDirection: 'row', alignItems: 'center'}}>
-            <Text style={{fontSize: 20, fontWeight: 400}}>POSH</Text>{' '}
+            <Text style={{fontSize: rMS(18), fontWeight: rMS(400)}}>POSH</Text>{' '}
             <Image source={require('../assets/Images/getstar.png')} />
           </TouchableOpacity>
           <TouchableOpacity
@@ -53,7 +56,7 @@ const Coursedetails = ({navigation}) => {
             <Text>15 Videos</Text>
           </TouchableOpacity>
         </View>
-        <View style={{marginTop: 50}}>
+        <View style={{marginTop:rMS(40)}}>
           <Image
             source={require('../assets/Images/Frame5.png')}
             style={{width: '100%'}}
@@ -99,7 +102,7 @@ const Coursedetails = ({navigation}) => {
 
         <View>
           <Text
-            style={{fontSize: 20, fontWeight: 400, color: '#555555', top: 15}}>
+            style={{fontSize: rS(18), fontWeight: 400, color: '#555555', top: 15}}>
             Chapters
           </Text>
         </View>
@@ -109,7 +112,7 @@ const Coursedetails = ({navigation}) => {
             <TouchableOpacity
               style={{
                 backgroundColor: '#EBEBEB',
-                height: 110,
+                height: rS(90),
                 width: '100%',
                 // borderWidth: 1,
                 // justifyContent: 'space-evenly',
@@ -146,7 +149,7 @@ const Coursedetails = ({navigation}) => {
               </View>
               <View style={{marginLeft: 50, marginTop: 10}}>
                 <Text style={{fontSize: 14}}>{itm.mss1}</Text>
-                <Text style={{fontWeight: 400, fontSize: 17}}>{itm.mss2}</Text>
+                <Text style={{fontWeight: 400, fontSize:Platform.OS==='ios'? 17:14}}>{itm.mss2}</Text>
               </View>
             </TouchableOpacity>
           );
@@ -171,7 +174,7 @@ const styles = StyleSheet.create({
   image: {},
   videoText: {
     marginTop: 5,
-    fontSize: 14,
+    fontSize: rS(11),
     color: '#333',
   },
   button:{
