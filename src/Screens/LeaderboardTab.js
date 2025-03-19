@@ -1,108 +1,208 @@
-import {StyleSheet, Text, View, useWindowDimensions, Image} from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  useWindowDimensions,
+  Image,
+  ScrollView,
+  FlatList,
+  TouchableOpacity,
+} from 'react-native';
 import React from 'react';
 import {SafeAreaView} from 'react-native-safe-area-context';
-
+import {scoringusers} from '../Components/scoringusers';
 const LeaderboardTab = () => {
   const {width, height} = useWindowDimensions();
   console.warn(width, height, 'width, height');
+  const shouldHideList = scoringusers.some(item => item.main == 'yes');
+  console.warn('hhhhhfffrrrrrrrrr', shouldHideList);
+
   return (
     <SafeAreaView>
-      <View style={[styles.box, {marginTop: height > 950 ? -50 : 10}]}>
+      <ScrollView>
+        <View style={[styles.box, {marginTop: height > 950 ? -5 : 10}]}>
+          <View
+            style={{
+              width: 56,
+              height: 56,
+              backgroundColor: 'green',
+              justifyContent: 'center',
+              alignItems: 'center',
+              borderRadius: 10,
+            }}>
+            <Text style={{fontWeight: 600, color: '#FFFFFF', fontSize: 24}}>
+              #2
+            </Text>
+          </View>
+          <View style={{width: 223}}>
+            <Text>You are doing better than 90% others leaners!</Text>
+          </View>
+        </View>
+
         <View
           style={{
-            width: 56,
-            height: 56,
-            backgroundColor: 'green',
             justifyContent: 'center',
-            alignItems: 'center',
-            borderRadius: 10,
+            flexDirection: 'row',
+            marginTop: 35,
+            width: '100%',
           }}>
-          <Text style={{fontWeight: 600, color: '#FFFFFF', fontSize: 24}}>
-            #2
-          </Text>
-        </View>
-        <View style={{width: 223}}>
-          <Text>You are doing better than 90% others leaners!</Text>
-        </View>
-      </View>
+          <View style={{marginTop: 35}}>
+            <Image
+              source={require('../assets/Images/Avatar.png')}
+              style={{left: 20}}
+            />
+            <View style={[styles.margins, {left: 25}]}>
+              <Text>{scoringusers[1].name}</Text>
+            </View>
+            <View
+              style={{
+                height: 34,
+                width: 64,
+                backgroundColor: '#FBBB00',
+                borderRadius: 10,
+                marginTop: 10,
+                left: 15,
+              }}>
+              <Text
+                style={{
+                  color: 'white',
+                  justifyContent: 'center',
+                  alignSelf: 'center',
+                  alignContent: 'center',
+                  textAlign: 'center',
+                  marginTop: 8,
+                }}>
+                420
+              </Text>
+            </View>
+            <View style={styles.margins}>
+              <Image source={require('../assets/Images/two.png')} />
+            </View>
+          </View>
 
-      <View style={[styles.price, {justifyContent: 'space-evenly'}]}>
-        <Image source={require('../assets/Images/Avatar.png')} />
-        <Image source={require('../assets/Images/Avatar.png')} />
-        <Image source={require('../assets/Images/Avatar.png')} />
-      </View>
-      <Image
-        source={require('../assets/Images/Medal.png')}
-        style={{
-          justifyContent: 'center',
-          alignSelf: 'center',
-          position: 'absolute',
-          top: 120,
-        }}
-      />
+          <View>
+            <Image
+              source={require('../assets/Images/Avatar.png')}
+              style={{left: 20}}
+            />
+            <Image
+              source={require('../assets/Images/Medal.png')}
+              style={{position: 'absolute', top: -30, left: 25}}
+            />
+            <View style={[styles.margins, {left: 25}]}>
+              <Text>{scoringusers[0].name}</Text>
+            </View>
+            <View
+              style={{
+                height: 34,
+                width: 64,
+                backgroundColor: '#FBBB00',
+                borderRadius: 10,
+                marginTop: 10,
+                left: 15,
+              }}>
+              <Text
+                style={{
+                  color: 'white',
+                  justifyContent: 'center',
+                  alignSelf: 'center',
+                  alignContent: 'center',
+                  textAlign: 'center',
+                  marginTop: 8,
+                }}>
+                420
+              </Text>
+            </View>
+            <View style={styles.margins}>
+              <Image source={require('../assets/Images/one.png')} />
+            </View>
+          </View>
 
-      <View style={[styles.price, {justifyContent: 'space-evenly'}]}>
-        <Text
-          style={{
-            // color: 'white',
-            justifyContent: 'space-between',
-            left:15,
-            top: 30,
-          }}>
-          Aman
-        </Text>
-        <Text
-          style={{
-            // color: 'white',
-            justifyContent: 'center',
-            alignSelf: 'center',
-            alignContent: 'center',
-            textAlign: 'center',
-            top: 28,
-          }}>
-          Aman
-        </Text>
-        <Text
-          style={{
-            // color: 'white',
-            justifyContent: 'center',
-            alignSelf: 'center',
-            alignContent: 'center',
-            textAlign: 'center',
-            top: 8,
-          }}>
-          Aman
-        </Text>
-      </View>
-      <View
-        style={{
-          height: 34,
-          width: 64,
-          backgroundColor: '#FBBB00',
-          borderRadius: 10,
-          top: 50,
-          left: 90,
-        }}>
-        <Text
-          style={{
-            color: 'white',
-            justifyContent: 'center',
-            alignSelf: 'center',
-            alignContent: 'center',
-            textAlign: 'center',
-            top: 8,
-          }}>
-          420
-        </Text>
-      </View>
-      <View style={[styles.price, {marginTop: 60}]}>
-        <Image source={require('../assets/Images/two.png')} />
-        <Image
-          source={require('../assets/Images/one.png')}
-          style={{bottom: 50}}
-        />
-        <Image source={require('../assets/Images/three.png')} />
-      </View>
+          <View style={{marginTop: 35}}>
+            <Image
+              source={require('../assets/Images/Avatar.png')}
+              style={{left: 20}}
+            />
+            <View style={[styles.margins, {left: 25}]}>
+              <Text>{scoringusers[2].name}</Text>
+            </View>
+            <View
+              style={{
+                height: 34,
+                width: 64,
+                backgroundColor: '#FBBB00',
+                borderRadius: 10,
+                marginTop: 10,
+                left: 15,
+              }}>
+              <Text
+                style={{
+                  color: 'white',
+                  justifyContent: 'center',
+                  alignSelf: 'center',
+                  alignContent: 'center',
+                  textAlign: 'center',
+                  marginTop: 8,
+                }}>
+                420
+              </Text>
+            </View>
+            <View style={styles.margins}>
+              <Image source={require('../assets/Images/three.png')} />
+            </View>
+          </View>
+        </View>
+
+        {shouldHideList && (
+          <FlatList
+            data={scoringusers}
+            renderItem={({item}) => (
+              <TouchableOpacity
+                style={{
+                  width: '90%',
+                  // borderWidth: 1,
+                  // justifyContent: 'space-evenly',
+                  alignSelf: 'center',
+                  height: 92,
+                  borderRadius: 20,
+                  marginTop: 10,
+                  flexDirection: 'row',
+                  backgroundColor: '#FFFFFF',
+                }}>
+                <View
+                  style={{
+                    height: 24,
+                    width: 24,
+                    backgroundColor: '#FFFFFF',
+                    borderRadius: 10,
+                    borderWidth: 0.1,
+                    borderColor: 'gray',
+                    marginTop: 20,
+                    marginLeft: 50,
+                  }}>
+                  <Text
+                    style={{
+                      justifyContent: 'center',
+                      alignSelf: 'center',
+                      top: 3,
+                      color: 'gray',
+                    }}>
+                    {item.no}
+                  </Text>
+                </View>
+                <View style={{marginLeft: 30, marginTop: 5}}>
+                  <Image source={item.image} />
+                </View>
+                <View style={{top: 15, marginLeft: 30}}>
+                  <Text style={{fontSize: 16}}>{item.name}</Text>
+                  <Text style={{fontSize: 14, color: 'gray'}}>390 Points</Text>
+                </View>
+              </TouchableOpacity>
+            )}
+            keyExtractor={item => item.no.toString()} // Add a keyExtractor
+          />
+        )}
+      </ScrollView>
     </SafeAreaView>
   );
 };
@@ -123,5 +223,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     marginTop: 50,
+  },
+  margins: {
+    marginTop: 10,
   },
 });
