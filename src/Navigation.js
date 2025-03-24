@@ -15,6 +15,7 @@ import ChapterWise from './Screens/ChapterWise';
 import ChapterWiseVideo from './Screens/ChapterWiseVideo';
 import Quiz from './Screens/Quiz';
 import Quizresult from './Screens/Quizresult';
+import Profile from './Screens/Profile';
 const Stack = createNativeStackNavigator();
 
 const Navigation = () => {
@@ -36,6 +37,7 @@ const Navigation = () => {
             component={Coursedetails}
             options={{headerShown: false}}
           />
+           <Stack.Screen name="Profile" component={Profile} />
           <Stack.Screen name="ChapterWise" component={ChapterWise} />
           <Stack.Screen name="ChapterWiseVideo" component={ChapterWiseVideo} />
           <Stack.Screen name="Quiz" component={Quiz} />

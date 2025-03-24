@@ -9,7 +9,7 @@ const Search = ({onPress, style, calender,width}) => {
       {calender ? (
         <Image
           source={require('../assets/Images/filter-sharp.png')}
-          style={{top: 15, left: 18}}
+          style={[{top: 15, left: 18},{style}]}
         />
       ) : (
         <Icon size={35} name="search" style={{left: 10, top:  10}} />
@@ -28,6 +28,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(255, 255, 255, 1)',
     position: 'absolute',
     right: rMS(40),
+    top:550
     // borderWidth:1
   },
 });

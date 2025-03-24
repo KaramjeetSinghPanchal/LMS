@@ -1,6 +1,6 @@
 const arr=[
     { id: 1, timeRange: '10:00 - 10:10' },
-    { id: 2, timeRange: '10:10 - 10:20' },
+    { id: 2, timeRange: '10:15 - 10:20' },
     { id: 3, timeRange: '10:20 - 10:30' },
     { id: 4, timeRange: '10:30 - 10:40' },
     { id: 5, timeRange: '10:40 - 10:50' },
@@ -12,5 +12,5 @@ const arr=[
   ]
 
 const result = arr.map((itm)=>{return(itm.timeRange)})
-  console.warn('arrrd',result);
-  
+
+  console.warn('arrrd',result)

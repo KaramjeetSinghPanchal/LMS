@@ -9,13 +9,18 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import React from 'react';
+import {useEffect} from 'react';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {scoringusers} from '../Components/scoringusers';
 const LeaderboardTab = () => {
   const {width, height} = useWindowDimensions();
   console.warn(width, height, 'width, height');
+
+  const filteredUsers = scoringusers.filter(user => user.main !== 'yes');
+
+
+  console.warn('jjjjtteeee', filteredUsers);
   const shouldHideList = scoringusers.some(item => item.main == 'yes');
-  console.warn('hhhhhfffrrrrrrrrr', shouldHideList);
 
   return (
     <SafeAreaView>
@@ -155,7 +160,7 @@ const LeaderboardTab = () => {
 
         {shouldHideList && (
           <FlatList
-            data={scoringusers}
+            data={filteredUsers}
             renderItem={({item}) => (
               <TouchableOpacity
                 style={{

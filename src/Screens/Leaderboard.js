@@ -7,12 +7,14 @@ import Toprated from './Toprated';
 
 const Tab = createMaterialTopTabNavigator();
 
-const Leaderboard = () => {
+const Leaderboard = ({navigation}) => {
   const {width, height} = useWindowDimensions();
   console.warn(width, height, 'width, height');
   return (
     <View style={{flex: 1}}>
-      <Header name={'Leaderboard'} />
+      <Header name={'Leaderboard'} onPress={() => {
+            navigation.goBack();
+          }}/>
       <Tab.Navigator screenOptions={{headerShown: false}}>
         <Tab.Screen name="Leaderboard" component={LeaderboardTab} />
         <Tab.Screen name="Top Rated" component={Toprated} />

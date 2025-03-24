@@ -1,10 +1,10 @@
 import { StyleSheet, Text, TextInput, View } from 'react-native'
 import React from 'react'
 
-const Textbox = () => {
+const Textbox = ({name,color}) => {
   return (
 
-    <Text style={{fontSize:13}}>Phone Number</Text>
+    <Text style={{fontSize:13,color:color}}>{name}</Text>
   )
 }
 

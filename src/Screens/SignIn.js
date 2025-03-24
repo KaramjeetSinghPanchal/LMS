@@ -38,10 +38,9 @@ const SignIn = ({navigation}) => {
         </Text>
       </View>
       <View style={styles.texts}>
-        <Textbox />
+        <Textbox name={'Phone Number'}/>
         <InputBox />
         <Button onPress={() => navigation.navigate('OTPScreen')}  navigation={navigation} text='Continue' />
-        {/* <Button onPress={() => navigation.navigate('Quiz')}  navigation={navigation} text='Continue' /> */}
 
       </View>
 
