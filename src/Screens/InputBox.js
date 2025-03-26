@@ -1,7 +1,7 @@
 import {StyleSheet, Text, View,TextInput} from 'react-native';
 import React from 'react';
 
-const InputBox = ({style,namee,phone,email}) => {
+const InputBox = ({style,namee,phone,email,number}) => {
   
   return (
     <View style={{top:10}}>
@@ -11,6 +11,7 @@ const InputBox = ({style,namee,phone,email}) => {
           namee ? namee 
           : phone ? phone 
           : email ? email 
+          
           : "Enter text here"
         }
         placeholderTextColor={style=='black'?'black':"gray"}

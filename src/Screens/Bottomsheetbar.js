@@ -76,11 +76,16 @@ const LanguageSelector = () => {
 const styles = StyleSheet.create({
   container: {
     padding: 10,
+    // height:70,
+    
   },
   title: {
     fontSize: 20,
     marginBottom: 0,
     textAlign: 'center',
+    // backgroundColor:'blue',
+    height:20,
+    width:'90%'
   },
   buttonText: {
     fontSize: 16,
@@ -88,12 +93,16 @@ const styles = StyleSheet.create({
     paddingVertical: 13, 
     borderBottomWidth: 1,
     borderBottomColor: '#f0f0f0',
+    // borderWidth:1,
+    borderRadius:10,
+    marginBottom:5,
+    borderColor:'blue'
   },
   closeButton: {
     backgroundColor: '#ff4444',
     padding: 15,
     borderRadius: 10,
-    marginTop: 20,
+    marginTop: -3,
     width:'90%',
     justifyContent:'center',
     alignSelf:'center'

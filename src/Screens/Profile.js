@@ -108,11 +108,13 @@ const Profile = ({navigation}) => {
         neww={'new'}
       />
 
-      <View style={{flex: 1}}>
+      <View style={{flex: 1,justifyContent:'center',alignSelf:'center',width:250}}>
         <Button
-          title="OPEN BOTTOM SHEET"
-          style={{backgroundColor: 'blue', color: 'white'}}
+          text="Choose Language"
+          style={{backgroundColor: 'rgba(11, 87, 207, 1)', color: 'white'}}
+          onPress={() => refRBSheet.current.open()}
         />
+
         <RBSheet
           ref={refRBSheet}
           useNativeDriver={true}
