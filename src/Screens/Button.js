@@ -15,7 +15,7 @@ export default Button
 
 const styles = StyleSheet.create({
     button:{
-        width:'90%',
+        width:'85%',
         backgroundColor:'rgba(11, 87, 207, 1)',
         height:45,
         // borderWidth:1,
