@@ -2,11 +2,13 @@ import {StyleSheet, Text, View} from 'react-native';
 import React, {useEffect} from 'react';
 import Navigation from './src/Navigation';
 import SplashScreen from 'react-native-splash-screen';
+import Tabnavigation from './src/Tabnavigation';
 const App = () => {
   useEffect(() => {
     SplashScreen.hide();
   }, []);
-  return <Navigation />;
+  return <Navigation />
+  ;
 };
 
 export default App;

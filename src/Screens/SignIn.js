@@ -7,28 +7,34 @@ import {
   TouchableOpacity,
   View,
   StatusBar,
+  ToastAndroid,
+  ActivityIndicator,
+  Platform
 } from 'react-native';
+import CustomToast from '../Components/CustomToast';
 import CountryPicker from 'react-native-country-picker-modal';
-import Icon from 'react-native-vector-icons/MaterialIcons';
 import React, {useState, useRef, useEffect} from 'react';
 import {SafeAreaView} from 'react-native-safe-area-context';
-import {Platform} from 'react-native';
 import Textbox from './Textbox';
 import InputBox from './InputBox';
 import Button from './Button';
 import {useNavigation} from '@react-navigation/native';
 import {fetchUserNo} from '../apiclient/api';
-
+import { resendOtp } from '../apiclient/api';
 const SignIn = ({navigation}) => {
   const [show, setShow] = useState(false);
   const phoneInput = useRef(null);
-  const [numb, setNumb] = useState('7017674512'); // Initialize with default value
+  const [numb, setNumb] = useState('7017674512');
   const [countryCode, setCountryCode] = useState('IN');
   const [country, setCountry] = useState(null);
   const [visible, setVisible] = useState(false);
-  const [code,setcode] = useState('91')
-console.warn('country',country);
+  const [code, setcode] = useState('91');
+  const [toastVisible, setToastVisible] = useState(false);
 
+  const [isLoading, setIsLoading] = useState(false);
+    const [otp, setOtp] = useState(null); // 5-digit OTP
+  
+ 
   const onSelect = selectedCountry => {
     setCountryCode(selectedCountry.cca2);
     setCountry(selectedCountry);
@@ -36,32 +42,45 @@ console.warn('country',country);
   };
 
 
-
-
   const handlesignup = async () => {
     try {
-      // Combine country code and phone number
-      const fullPhoneNumber = country 
-        ? `${country.callingCode[0]}${numb}`
-        : `91${numb}`; 
-  
-      const data = await fetchUserNo(fullPhoneNumber);
+      setIsLoading(true);
+      const fullPhoneNumber = country ? `${country.callingCode[0]}${numb}` : `91${numb}`;
+      const response = await fetchUserNo(fullPhoneNumber);
+      console.warn("API Response:", response);
       
-      if (data.status_code === 200) {
-        Alert.alert(
-          'Success', 
-          'OTP sent successfully!',
-          [{ text: 'OK', onPress: () => navigation.navigate('OTPScreen') }]
-        );
+      if (response.status_code === 200) {
+        if (response.data?.access) {
+          await AsyncStorage.multiSet([
+            ['access_token', response.data.access],
+            ['refresh_token', response.data.refresh]
+          ]);
+          console.log('Tokens stored successfully!');
+        }
+  
+        const receivedOtp = response?.data?.otp;
+        setTimeout(() => {
+          navigation.navigate('OTPScreen', { 
+            otp: receivedOtp,
+            phoneNumber: numb,
+            fullPhoneNumber: fullPhoneNumber
+          });
+        }, 1000);
+        showToast();
       }
     } catch (error) {
-      Alert.alert(
-        'Error',
-        error.message || 'Failed to send OTP. Please try again.'
-      );
+      console.error('Signup error:', error);
+      Alert.alert('Error', error.message || 'Failed to send OTP');
+    } finally {
+      setIsLoading(false);
     }
-  };
+  };   
 
+
+  const showToast = () => {
+    setToastVisible(true);
+    setTimeout(() => setToastVisible(false), 2000);
+  };
   return (
     <SafeAreaView>
       <ScrollView showsHorizontalScrollIndicator={false}>
@@ -158,7 +177,6 @@ console.warn('country',country);
             value={numb} // Current value
           />
         </View>
-      
 
         {/* Divider Section */}
         <View
@@ -172,13 +190,18 @@ console.warn('country',country);
           <View style={styles.divider} />
         </View>
 
-      
+   
+
         <View style={{justifyContent: 'center', alignItems: 'center'}}>
-          <Button
-            text={'Continue'}
-            onPress={handlesignup} 
-          />
+        {isLoading ? (
+    <ActivityIndicator size="large" color="blue" />
+    
+  ) : (
+    <Button text={'Continue'} onPress={handlesignup} />
+  )}
         </View>
+
+
 
         {/* MovinSync Button */}
         <TouchableOpacity style={styles.movinSyncButton}>
@@ -188,7 +211,11 @@ console.warn('country',country);
           />
           <Text style={styles.movinSyncText}>Sign in with MovinSync</Text>
         </TouchableOpacity>
+
+       
+
       </ScrollView>
+      {toastVisible && <CustomToast message="OTP sent Successfully" />}
     </SafeAreaView>
   );
 };
@@ -244,8 +271,8 @@ const styles = StyleSheet.create({
     height: 1,
     width: Platform.OS === 'ios' ? 115 : 80,
     backgroundColor: 'gray',
-    marginLeft:10,
-    marginRight:10
+    marginLeft: 10,
+    marginRight: 10,
   },
   dividerText: {
     marginTop: -10,

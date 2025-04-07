@@ -1,32 +1,41 @@
-import {StyleSheet, Text, View, Image, ImageBase} from 'react-native';
+import {StyleSheet, Text, View, Image} from 'react-native';
 import React, {useRef} from 'react';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import Header from '../Components/Header';
 import Textbox from './Textbox';
 import InputBox from './InputBox';
 import {useState} from 'react';
-import Navigation from '../Navigation';
 import Button from './Button';
-import RBSheet from 'react-native-raw-bottom-sheet';
-import {TouchableOpacity} from 'react-native';
-import Bottomsheetbar from './Bottomsheetbar';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 const Profile = ({navigation}) => {
   const [namee, setnamee] = useState('Aman Sharama');
   const [email, setemail] = useState('amansharma98@gmail.com');
   const [phone, setphone] = useState('+919876543210');
   const refRBSheet = useRef();
 
+  const handleLogout = async () => {
+    try {
+      // Remove both tokens
+      await AsyncStorage.multiRemove(['access_token', 'refresh_token']);
+      
+      console.log('Tokens removed successfully!');
+      navigation.navigate('SignIn');
+    } catch (error) {
+      console.error('Logout error:', error);
+      Alert.alert('Error', 'Failed to logout. Please try again.');
+    }
+  };
+
   return (
     <SafeAreaView>
       <Header name="Profile" onPress={navigation} />
-
       <View style={{justifyContent: 'center', alignItems: 'center'}}>
         <Image source={require('../assets/Images/userbig.png')} />
         <Image
           source={require('../assets/Images/Edit.png')}
           style={{top: -40, left: 40}}
         />
-        <Text style={{fontSize: 24, marginTop: 25}}>Aman Sharma</Text>
+        <Text style={{fontSize: 24, bottom: 10}}>Aman Sharma</Text>
       </View>
 
       <View
@@ -37,7 +46,8 @@ const Profile = ({navigation}) => {
           width: '90%',
           alignSelf: 'center',
           borderRadius: 20,
-          top: 10,
+          marginTop: 20,
+          top: 15,
         }}>
         <View style={{flexDirection: 'row', marginTop: 10}}>
           <View style={{marginRight: 75}}>
@@ -106,9 +116,10 @@ const Profile = ({navigation}) => {
         text="Log Out"
         style={{justifyContent: 'center', alignSelf: 'center', bottom: -200}}
         neww={'new'}
+        onPress={handleLogout}
       />
 
-      <View style={{flex: 1,justifyContent:'center',alignSelf:'center',width:250}}>
+      {/* <View style={{flex: 1,justifyContent:'center',alignSelf:'center',width:250}}>
         <Button
           text="Choose Language"
           style={{backgroundColor: 'rgba(11, 87, 207, 1)', color: 'white'}}
@@ -135,7 +146,7 @@ const Profile = ({navigation}) => {
           }}>
           <Bottomsheetbar />
         </RBSheet>
-      </View>
+      </View> */}
     </SafeAreaView>
   );
 };

@@ -1,4 +1,4 @@
-import { StyleSheet, TextInput, View } from 'react-native';
+import { StyleSheet, TextInput, View,ToastAndroid } from 'react-native';
 import React from 'react';
 
 const InputBox = ({ style, placeholder, onChangeText, value }) => {
@@ -10,7 +10,7 @@ const InputBox = ({ style, placeholder, onChangeText, value }) => {
         placeholderTextColor={style === 'black' ? 'black' : "gray"}
         onChangeText={onChangeText}
         value={value}
-        keyboardType="phone-pad"
+        keyboardType="numeric" 
       />
     </View>
   );
